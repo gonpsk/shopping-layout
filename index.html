@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <div class="nav">
+        <div class="nav-con">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://pngfre.com/wp-content/uploads/apple-logo-6-1024x1024.png" alt="">
+                </a>
+            </div>
+            <div class="nav-profile">
+                <p class="nav-profile-name">GonHug</p>
+
+                <div onclick="opencart()" class="nav-profile-cart" style="cursor: pointer;">
+                    <!-- เอามาจาก fontawesome -->
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div id="cartcount" class="cartcount" style="display: none;">
+                        0
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <input onkeyup="searchsomething(this)" id="txt_serach" type="text" class="sidebar-search"
+                placeholder="Search something...">
+            <a onclick="searchproduct('all')" class="sidebar-item">All product</a>
+            <a onclick="searchproduct('shoe')" class="sidebar-item">Shoe</a>
+            <a onclick="searchproduct('shirt')" class="sidebar-item">Shirt</a>
+
+        </div>
+        <div id="productlist" class="product">
+
+
+        </div>
+    </div>
+
+    <div id="modaldesc" class="modal" style="display: none;">
+        <div onclick="closemodal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>Detail</h2>
+            <br>
+            <div class="modaldesc-content">
+                <img id="mdd-img" class="desc-img"
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="">
+                <div class="modaldesc-detail">
+                    <p id="mdd-name" style="font-size: 1.3vw; color: black;">Product Name</p>
+                    <p id="mdd-price" style="color: black;">500 THB</p>
+                    <br>
+                    <p id="mdd-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, iste, illum et
+                        deserunt nesciunt
+                        in iusto tempore omnis perspiciatis sunt delectus porro amet consequatur mollitia suscipit quo
+                        reiciendis incidunt vitae rem, ullam reprehenderit voluptatum voluptate nulla. Praesentium
+                        recusandae totam delectus.</p>
+                    <br>
+                    <div class="btn-control">
+                        <button onclick="closemodal()" class="btn">Close</button>
+                        <button class="btn btn-buy" onclick="addtocart()">Add to cart</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalcart" class="modal" style="display: none;">
+        <div class="modal-bg" onclick="closemodal()"></div>
+        <div class="modal-page">
+            <h2>My cart</h2>
+            <br>
+            <div id="mycart" class="cart-list">
+                <div class="cartlist-item">
+                    <div class="cartlist-left">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="">
+                        <div class="cardlist-detail">
+                            <p style="font-size: 1.2vw;">Product name</p>
+                            <p>500 THB</p>
+                        </div>
+                    </div>
+                    <div class="cardlist-right">
+                        <p  class="btnc">-</p>
+                        <p id="productnumber" style="margin: 0 20px">1</p>
+                        <p class="btnc">+</p>
+                    </div>
+
+                </div>
+            
+            
+                <div class="cartlist-item">
+                    <div class="cartlist-left">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="">
+                        <div class="cardlist-detail">
+                            <p style="font-size: 1.2vw;">Product name</p>
+                            <p>500 THB</p>
+                        </div>
+                    </div>
+                    <div class="cardlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0 20px">1</p>
+                        <p class="btnc">+</p>
+                    </div>
+
+                </div>
+            
+                <div class="cartlist-item">
+                    <div class="cartlist-left">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="">
+                        <div class="cardlist-detail">
+                            <p style="font-size: 1.2vw;">Product name</p>
+                            <p>500 THB</p>
+                        </div>
+                    </div>
+                    <div class="cardlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0 20px">1</p>
+                        <p class="btnc">+</p>
+                    </div>
+
+                </div>
+            
+            <div class="btn-control">
+                <button onclick="closemodal()" class="btn">
+                    Cancel
+                </button>
+                <button  class="btn btn-buy">
+                    Buy
+                </button>
+            </div>
+        </div>
+
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>l
